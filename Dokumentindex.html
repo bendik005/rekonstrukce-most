@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rekonstrukce Most – Zednické práce</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, #111, #1a1a1a);
+      color: #fff;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    header video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.35);
+    }
+    header .logo-img {
+      width: 120px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1.3rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+    header a.button-poptat {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      background: #d4af37;
+      color: #000;
+      font-weight: 700;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    header a.button-poptat:hover {
+      background: #b98e2f;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #000;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #d4af37;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.3s;
+      font-weight: 600;
+    }
+    nav a:hover {
+      background: #222;
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      transition: background 0.5s;
+    }
+    section:nth-of-type(even) {
+      background: #1a1a1a;
+    }
+    h2 {
+      color: #d4af37;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .services i, .why-us i {
+      font-size: 2rem;
+      color: #d4af37;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    .service, .why-us-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      padding: 0.5rem 0;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .gallery img {
+      width: calc(50% - 0.5rem);
+      border: 2px solid #444;
+      transition: transform 0.3s, filter 0.3s;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border: none;
+      background: #222;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    button {
+      background: #d4af37;
+      color: black;
+      padding: 0.75rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background 0.3s;
+      font-size: 1.1rem;
+    }
+    button:hover {
+      background: #b98e2f;
+    }
+    footer {
+      background: #000;
+      color: #777;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid #222;
+      font-size: 0.9rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d4af37;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    /* Recenze */
+    .reviews {
+      background: #222;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+    .review-item {
+      margin-bottom: 1.5rem;
+    }
+    .stars {
+      color: #d4af37;
+      margin-bottom: 0.3rem;
+    }
+    .review-text {
+      font-style: italic;
+      color: #ddd;
+    }
+    /* Proè právì já */
+    .why-us {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .why-us-item {
+      background: #222;
+      padding: 1.5rem;
+      border-radius: 8px;
+      width: 280px;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <video autoplay muted loop>
+      <source src="https://cdn.coverr.co/videos/coverr-working-construction-site-2520/1080p.mp4" type="video/mp4" />
+    </video>
+    <img src="https://i.imgur.com/4W6FmzY.png" alt="Logo Rekonstrukce Most" class="logo-img" />
+    <h1>Moderní rekonstrukce bytù a domù</h1>
+    <p>Spolehlivì. Kvalitnì. Za férovou cenu.</p>
+    <a href="#kontakt" class="button-poptat">Nezávaznì poptat</a>
+  </header>
+
+  <nav>
+    <a href="#o-mne">O mnì</a>
+    <a href="#sluzby">Služby</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#recenze">Recenze</a>
+    <a href="#proc">Proè právì já</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
+  <section id="o-mne" data-aos="fade-up">
+    <h2>O mnì</h2>
+    <p>Jsem Vašek, zedník s více než 15 lety praxe v rekonstrukcích bytù a domù. Pracuji v Mostì a okolí, zamìøuji se na kvalitu, spolehlivost a osobní pøístup ke každému zákazníkovi.</p>
+  </section>
+
+  <section id="sluzby" data-aos="fade-up">
+    <h2>Služby</h2>
+    <div class="services">
+      <div class="service"><i class="fas fa-hammer"></i> Kompletní rekonstrukce bytù a domù</div>
+      <div class="service"><i class="fas fa-paint-roller"></i> Malby, omítky a štuky</div>
+      <div class="service"><i class="fas fa-border-style"></i> Sádrokartonové konstrukce</div>
+      <div class="service"><i class="fas fa-tools"></i> Všeobecné zednické práce</div>
+    </div>
+  </section>
+
+  <section id="galerie" data-aos="fade-up">
+    <h2>Ukázky prací</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Rekonstrukce 1" />
+      <img src="https://images.unsplash.com/photo-1590650046871-92c887180603?auto=format&fit=crop&w=800&q=80" alt="Rekonstrukce 2" />
+      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80" alt="Rekonstrukce 3" />
+      <img src="https://images.unsplash.com/photo-1600585154336-4c6e61003c7d?auto=format&fit=crop&w=800&q=80" alt="Rekonstrukce 4" />
+    </div>
+  </section>
+
+  <section id="recenze" data-aos="fade-up">
+    <h2>Recenze zákazníkù</h2>
+    <div class="reviews">
+      <div class="review-item">
+        <div class="stars">?????</div>
+        <p class="review-text">„Vašek odvedl skvìlou práci na naší kuchyni. Preciznost a rychlost – doporuèuji!“</p>
+        <p><strong>- Jana P.</strong></p>
+      </div>
+      <div class="review-item">
+        <div class="stars">?????</div>
+        <p class="review-text">„Rekonstrukce koupelny probìhla bez problémù, výborná komunikace a skvìlá cena.“</p>
+        <p><strong>- Petr S.</strong></p>
+      </div>
+      <div class="review-item">
+        <div class="stars">?????</div>
+        <p class="review-text">„Díky Vaškovi máme krásný nový byt, všechno podle pøedstav.“</p>
+        <p><strong>- Lenka M.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proc" data-aos="fade-up">
+    <h2>Proè právì já</h2>
+    <div class="why-us">
+      <div class="why-us-item">
+        <i class="fas fa-check-circle"></i> Více než 15 let zkušeností v oboru
+      </div>
+      <div class="why-us-item">
+        <i class="fas fa-check-circle"></i> Osobní pøístup ke každému zákazníkovi
+      </div>
+      <div class="why-us-item">
+        <i class="fas fa-check-circle"></i> Férové ceny bez skrytých poplatkù
+      </div>
+      <div class="why-us-item">
+        <i class="fas fa-check-circle"></i> Dodržení termínù a kvalitní práce
+      </div>
+      <div class="why-us-item">
+        <i class="fas fa-check-circle"></i> Práce pouze s kvalitními materiály
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" data-aos="fade-up">
+    <h2>Kontaktujte mì</h2>
+    <p><strong>Telefon:</strong> +420 123 456 789</p>
+    <p><strong>E-mail:</strong> vasrekonstrukce@email.cz</p>
+    <form>
+      <input type="text" placeholder="Vaše jméno" required />
+      <input type="email" placeholder="Váš e-mail" required />
+      <textarea rows="5" placeholder="Zpráva"></textarea>
+      <button type="submit">Odeslat zprávu</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Vašek – Rekonstrukce Most | Moderní a kvalitní práce
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
